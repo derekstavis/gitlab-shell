@@ -2,10 +2,9 @@
 
 #### Code status
 
-* [![CI](http://ci.keylab.org/projects/4/status.png?ref=master)](http://ci.keylab.org/projects/4?ref=master)
-* [![Build Status](https://travis-ci.org/keylabhq/keylab-shell.png?branch=master)](https://travis-ci.org/keylabhq/keylab-shell)
-* [![Code Climate](https://codeclimate.com/github/keylabhq/keylab-shell.png)](https://codeclimate.com/github/keylabhq/keylab-shell)
-* [![Coverage Status](https://coveralls.io/repos/keylabhq/keylab-shell/badge.png?branch=master)](https://coveralls.io/r/keylabhq/keylab-shell)
+* [![Build Status](https://travis-ci.org/derekstavis/keylab-shell.png?branch=master)](https://travis-ci.org/derekstavis/keylab-shell)
+* [![Code Climate](https://codeclimate.com/github/derekstavis/keylab-shell.png)](https://codeclimate.com/github/derekstavis/keylab-shell)
+* [![Coverage Status](https://coveralls.io/repos/derekstavis/keylab-shell/badge.png?branch=master)](https://coveralls.io/r/derekstavis/keylab-shell)
 
 
 __Requires ruby 1.9+__
