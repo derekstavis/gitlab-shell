@@ -1,16 +1,17 @@
 require 'tempfile'
 
-require_relative 'gitlab_config'
-require_relative 'gitlab_logger'
+require_relative 'keylab_config'
+require_relative 'keylab_logger'
 
-class GitlabKeys
+class Keylab
   attr_accessor :auth_file, :key
 
   def initialize
     @command = ARGV.shift
     @key_id = ARGV.shift
     @key = ARGV.shift
-    @auth_file = GitlabConfig.new.auth_file
+    @auth_file = KeylabConfig.new.auth_file
+    @hook_executable = KeylabConfig.new.hook_executable
   end
 
   def exec
@@ -19,7 +20,7 @@ class GitlabKeys
     when 'rm-key';  rm_key
     when 'clear';  clear
     else
-      $logger.warn "Attempt to execute invalid gitlab-keys command #{@command.inspect}."
+      $logger.warn "Attempt to execute invalid keylab-keys command #{@command.inspect}."
       puts 'not allowed'
       false
     end
@@ -28,8 +29,9 @@ class GitlabKeys
   protected
 
   def add_key
+    config = KeylabConfig.new
     $logger.info "Adding key #{@key_id} => #{@key.inspect}"
-    auth_line = "command=\"#{ROOT_PATH}/bin/gitlab-shell #{@key_id}\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty #{@key}"
+    auth_line = "command=\"#{@hook_executable} #{@key_id}\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty #{@key}"
     open(auth_file, 'a') { |file| file.puts(auth_line) }
   end
 
@@ -38,7 +40,7 @@ class GitlabKeys
     Tempfile.open('authorized_keys') do |temp|
       open(auth_file, 'r+') do |current|
         current.each do |line|
-          temp.puts(line) unless line.include?("/bin/gitlab-shell #{@key_id}\"")
+          temp.puts(line) unless line.include?("{@hook_executable} #{@key_id}\"")
         end
       end
       temp.close
@@ -47,6 +49,6 @@ class GitlabKeys
   end
 
   def clear
-    open(auth_file, 'w') { |file| file.puts '# Managed by gitlab-shell' }
+    open(auth_file, 'w') { |file| file.puts '# Managed by #{@hook_executable}' }
   end
 end

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://dev.gitlab.org/api/v3/internal/check
+    uri: https://dev.keylab.org/api/v3/internal/check
     body:
       encoding: US-ASCII
       string: ''
@@ -42,7 +42,7 @@ http_interactions:
       - miss
     body:
       encoding: US-ASCII
-      string: ! '{"api_version":"v3","gitlab_version":"5.0.0pre","gitlab_rev":"473efc8"}'
+      string: ! '{"api_version":"v3","keylab_version":"5.0.0pre","keylab_rev":"473efc8"}'
     http_version: 
   recorded_at: Mon, 11 Mar 2013 13:05:30 GMT
 recorded_with: VCR 2.4.0

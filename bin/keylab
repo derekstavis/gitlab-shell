@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/keylab_init'
+
+#
+# Keys shell. Add/remove keys from ~/.ssh/authorized_keys
+#
+# Ex.
+#   /bin/keylab-keys add-key key-782 "ssh-rsa AAAAx321..."
+#
+#   /bin/keylab-keys rm-key key-23 "ssh-rsa AAAAx321..."
+#
+#   /bin/keylab-keys clear"
+#
+
+require File.join(ROOT_PATH, 'lib', 'keylab_keys')
+
+# Return non-zero if command execution was not successful
+if Keylab.new.exec
+  exit 0
+else
+  exit 1
+end

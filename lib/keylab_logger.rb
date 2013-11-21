@@ -1,6 +1,6 @@
 require 'logger'
 
-require_relative 'gitlab_config'
+require_relative 'keylab_config'
 
 def convert_log_level log_level
   Logger.const_get(log_level.upcase)
@@ -10,7 +10,7 @@ rescue NameError
   Logger::INFO
 end
 
-config = GitlabConfig.new
+config = KeylabConfig.new
 
 $logger = Logger.new(config.log_file)
 $logger.level = convert_log_level(config.log_level)
