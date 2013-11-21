@@ -6,11 +6,11 @@ require_relative '../lib/keylab_init'
 # Keys shell. Add/remove keys from ~/.ssh/authorized_keys
 #
 # Ex.
-#   /bin/keylab-keys add-key key-782 "ssh-rsa AAAAx321..."
+#   /bin/keylab add-key key-782 "ssh-rsa AAAAx321..."
 #
-#   /bin/keylab-keys rm-key key-23 "ssh-rsa AAAAx321..."
+#   /bin/keylab rm-key key-23 "ssh-rsa AAAAx321..."
 #
-#   /bin/keylab-keys clear"
+#   /bin/keylab clear"
 #
 
 require File.join(ROOT_PATH, 'lib', 'keylab_keys')

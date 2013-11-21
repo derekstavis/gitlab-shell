@@ -79,7 +79,7 @@ describe Keylab do
     it 'should log a warning on unknown commands' do
       keylab_keys = build_keylab_keys('nooope')
       keylab_keys.stub(puts: nil)
-      $logger.should_receive(:warn).with('Attempt to execute invalid keylab-keys command "nooope".')
+      $logger.should_receive(:warn).with('Attempt to execute invalid keylab command "nooope".')
       keylab_keys.exec
     end
   end

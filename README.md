@@ -25,13 +25,13 @@ __Requires ruby 1.9+__
 
 Add key
 
-    ./bin/keylab-keys add-key key-782 "ssh-rsa AAAAx321..."
+    ./bin/keylab add-key key-782 "ssh-rsa AAAAx321..."
 
 Remove key
 
-    ./bin/keylab-keys rm-key key-23 "ssh-rsa AAAAx321..."
+    ./bin/keylab rm-key key-23 "ssh-rsa AAAAx321..."
 
 Remove all keys from authorized_keys file
 
-    ./bin/keylab-keys clear
+    ./bin/keylab clear
 

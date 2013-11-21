@@ -20,7 +20,7 @@ class Keylab
     when 'rm-key';  rm_key
     when 'clear';  clear
     else
-      $logger.warn "Attempt to execute invalid keylab-keys command #{@command.inspect}."
+      $logger.warn "Attempt to execute invalid keylab command #{@command.inspect}."
       puts 'not allowed'
       false
     end
