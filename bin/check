@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/keylab_init'
-require_relative '../lib/keylab_net'
 
 #
 # GitLab shell check task
