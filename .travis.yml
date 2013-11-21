@@ -9,5 +9,6 @@ rvm:
   - 2.0.0
 before_script:
   - "cp config.yml.example config.yml"
+  - "touch authorized_keys"
 script: "bundle exec rspec spec"
 

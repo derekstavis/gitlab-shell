@@ -2,11 +2,11 @@
 user: root
 
 # File used as authorized_keys for keylab user
-auth_file: "/home/git/.ssh/authorized_keys"
+auth_file: "authorized_keys"
 
 # Log file.
 # Default is keylab-shell.log in the root directory.
-# log_file: "/home/git/keylab-shell/keylab-shell.log"
+# log_file: "keylab-shell.log"
 
 # Log level. INFO by default
 log_level: INFO
