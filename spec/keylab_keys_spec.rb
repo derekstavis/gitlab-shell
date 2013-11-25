@@ -18,7 +18,7 @@ describe Keylab do
     before do
       FileUtils.mkdir_p(File.dirname(tmp_authorized_keylab_path))
       open(tmp_authorized_keylab_path, 'w') { |file| file.puts('existing content') }
-      keylab_keys.stub(auth_file: tmp_authorized_keys_path)
+      keylab_keys.stub(auth_file: tmp_authorized_keylab_path)
     end
 
     describe :add_key do
@@ -26,7 +26,7 @@ describe Keylab do
 
       it "adds a line at the end of the file" do
         keylab_keys.send :add_key
-        auth_line = "command=\"#{ROOT_PATH}/bin/keylab-shell key-741\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-rsa AAAAB3NzaDAxx2E"
+        auth_line = "# key managed by keylab-shell: key-741\nssh-rsa AAAAB3NzaDAxx2E"
         File.read(tmp_authorized_keylab_path).should == "existing content\n#{auth_line}\n"
       end
 
@@ -41,9 +41,9 @@ describe Keylab do
       let(:keylab_keys) { build_keylab_keys('rm-key', 'key-741', 'ssh-rsa AAAAB3NzaDAxx2E') }
 
       it "removes the right line" do
-        other_line = "command=\"#{ROOT_PATH}/bin/keylab-shell key-742\",options ssh-rsa AAAAB3NzaDAxx2E"
+        other_line = "# key managed by keylab-shell: key-742\nssh-rsa AAAAB3NzaDAxx2E"
         open(tmp_authorized_keylab_path, 'a') do |auth_file|
-          auth_file.puts "command=\"#{ROOT_PATH}/bin/keylab-shell key-741\",options ssh-rsa AAAAB3NzaDAxx2E"
+          auth_file.puts "# key managed by keylab-shell: key-741\nssh-rsa AAAAB3NzaDAxx2E"
           auth_file.puts other_line
         end
         keylab_keys.send :rm_key
