@@ -11,7 +11,6 @@ class Keylab
     @key_id = ARGV.shift
     @key = ARGV.shift
     @auth_file = KeylabConfig.new.auth_file
-    @hook_executable = KeylabConfig.new.hook_executable
   end
 
   def exec
@@ -29,19 +28,28 @@ class Keylab
   protected
 
   def add_key
-    config = KeylabConfig.new
     $logger.info "Adding key #{@key_id} => #{@key.inspect}"
-    auth_line = "command=\"#{@hook_executable} #{@key_id}\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty #{@key}"
-    open(auth_file, 'a') { |file| file.puts(auth_line) }
+    open(auth_file, 'a') { |file| file.puts("#{key_header}\n#{@key}") }
   end
 
   def rm_key
     $logger.info "Removing key #{@key_id}"
     Tempfile.open('authorized_keys') do |temp|
       open(auth_file, 'r+') do |current|
-        current.each do |line|
-          temp.puts(line) unless line.include?("{@hook_executable} #{@key_id}\"")
+        
+        key_index = -1
+        current.each_with_index do |line, index|
+          if line.include?(key_header)
+            key_index = index+1
+            next
+          elsif key_index == index
+            key_index = -1
+            next
+          else 
+            temp.puts(line) 
+          end
         end
+
       end
       temp.close
       FileUtils.cp(temp.path, auth_file)
@@ -49,6 +57,12 @@ class Keylab
   end
 
   def clear
-    open(auth_file, 'w') { |file| file.puts '# Managed by #{@hook_executable}' }
+    open(auth_file, 'w') { |file| file.puts '' }
+  end
+
+  private
+
+  def key_header
+    "# key managed by keylab-shell: #{@key_id}"
   end
 end

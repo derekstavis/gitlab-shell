@@ -1,4 +1,4 @@
-### keylab-shell: ssh access and repository management
+### keylab-shell: ssh access management
 
 #### Code status
 
@@ -25,13 +25,14 @@ __Requires ruby 1.9+__
 
 Add key
 
-    ./bin/keylab add-key key-782 "ssh-rsa AAAAx321..."
+    ./bin/keylab add-key key-23 "ssh-rsa AAAAx321..."
+
+You can include custom command/options to ssh line.
 
 Remove key
 
-    ./bin/keylab rm-key key-23 "ssh-rsa AAAAx321..."
+    ./bin/keylab rm-key key-23
 
 Remove all keys from authorized_keys file
 
     ./bin/keylab clear
-

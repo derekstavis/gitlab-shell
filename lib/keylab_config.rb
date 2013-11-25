@@ -19,8 +19,4 @@ class KeylabConfig
     @config['log_level'] ||= 'INFO'
   end
 
-  def hook_executable
-    @config['hook_executable'] ||= 'INFO'
-  end
-
 end
